@@ -10,7 +10,10 @@ def cli(network):
 
 from ape import accounts, Contract
 import alienbase, compound
-test = accounts.load("test")
+acct = accounts.load("test")
+val = 1
 # contract1 = Contract("0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22")
-compound_ror = (compound.withdraw(acct) - compound.deposit(acct, x))/compound.deposit(acct, x)
-alienbase_ror = (alienbase.withdraw(acct) - alienbase.deposit(acct, x))/alienbase.deposit(acct, x)
+compound.deposit(acct, val)
+alienbase.deposit(acct, val)
+compound_ror = (compound.withdraw(acct) - val)/val
+alienbase_ror = (alienbase.withdraw(acct) - val)/val
