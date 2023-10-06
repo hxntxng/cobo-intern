@@ -41,12 +41,17 @@ def withdraw(acct):
     deposit_contract_abi = os.getenv("alienbase_deposit_abi")
     deposit_contract = w3.eth.contract(address = deposit_contract_address, abi = deposit_contract_abi)
     deposit_contract_txn = deposit_contract.functions.deposit(6, 0)
-    deposit_contract_signtxn = w3.eth.account.sign_transaction(deposit_contract_txn, private_key = acct._private_key)
+    # deposit_contract_signtxn = w3.eth.account.sign_transaction(deposit_contract_txn, private_key = acct._private_key)
     # w3.eth.send_raw_transaction(deposit_contract_signtxn.rawTransaction)
     withdraw_contract_address = w3.to_checksum_address('0x52eaecac2402633d98b95213d0b473e069d86590')
     withdraw_contract_abi = os.getenv("alienbase_deposit_abi")
     withdraw_contract = w3.eth.contract(address = withdraw_contract_address, abi = withdraw_contract_abi)
-    val = withdraw_contract.functions.userInfo(6, w3.to_checksum_address('0x0f25496cf87be88c0a352d822c4ba92479f53601')).amount
-    withdraw_contract_txn = withdraw_contract.functions.withdraw(6, val)   
-    withdraw_contract_signtxn = w3.eth.account.sign_transaction(withdraw_contract_txn, private_key = acct._private_key)
+    val = withdraw_contract.functions.userInfo(6, w3.to_checksum_address('0x0f25496cf87be88c0a352d822c4ba92479f53601')).call()
+    print(val)
+    # withdraw_contract_txn = withdraw_contract.functions.withdraw(6, val)   
+    # withdraw_contract_signtxn = w3.eth.account.sign_transaction(withdraw_contract_txn, private_key = acct._private_key)
     # w3.eth.send_raw_transaction(withdraw_contract_signtxn.rawTransaction)
+from ape import accounts, Contract
+import alienbase, compound
+acct = accounts.load("test")
+withdraw(acct)
