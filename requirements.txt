@@ -1,0 +1,9 @@
+#ape_safe==0.7.1
+eth-brownie @ git+https://github.com/eth-brownie/brownie@bc7b511583060fdaff1d4b5269aedcc1cb710bc6
+eth_abi==2.2.0
+eth_utils==1.10.0
+hexbytes==0.2.3
+jsonschema==3.2.0
+pysha3==1.0.2
+pytest==6.2.5
+web3==5.31.3
