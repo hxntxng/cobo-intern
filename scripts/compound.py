@@ -1,24 +1,31 @@
 from web3 import Web3, HTTPProvider
 from dotenv import load_dotenv
-import os
+import abi
 load_dotenv()
 
 def deposit(acct, val):
     nonce = w3.eth.get_transaction_count(acct.address)
-    exec_contract_address = '0xbc66d5bf7707b6237ebb630370f3f181b37000b9'
-    exec_contract_abi = os.getenv("compound_exec_abi")
-    exec_contract = w3.eth.contract(address = exec_contract_address, abi = exec_contract_abi)
-    approve_contract_txn = exec_contract.functions.execTransaction(0, '0x46e6b214b524310239732D51387075E0e70970bf', 0, '0x110496e500000000000000000000000078d0677032a35c63d142a48a2037048871212a8c0000000000000000000000000000000000000000000000000000000000000001', '0x626f7400000000000000000000000000000000000000000000000000000000000000000000000000000000008e9aab87a2240f2c94da124637b7923863084af5', '0x')
-    approve_contract_signtxn = w3.eth.account.sign_transaction(approve_contract_txn, private_key = acct._private_key)
-    # w3.eth.send_raw_transaction(approve_contract_signtxn.rawTransaction)
-    deposit_contract_txn = contract1.functions.execTransaction(0, '0x78D0677032A35c63D142a48A2037048871212a8C', val, '0x555029a6000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000001414354494f4e5f535550504c595f4e41544956455f544f4b454e00000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000006000000000000000000000000046e6b214b524310239732d51387075e0e70970bf000000000000000000000000f4a618e4850a46814f927b2f706897b379f2fd160000000000000000000000000000000000000000000000000011c37937e08000', '0x626f7400000000000000000000000000000000000000000000000000000000000000000000000000000000006d83a59aaad46aa623a3b064d8c0b77e2d965dc6', '0x')
-    deposit_contract_signtxn = w3.eth.account.sign_transaction(deposit_contract_txn, private_key = acct._private_key)
-    # w3.eth.send_raw_transaction(deposit_contract_signtxn.rawTransaction)
+    allow_contract_address = '0x46e6b214b524310239732d51387075e0e70970bf'
+    allow_contract_abi = abi.compound_allow_abi
+    allow_contract = w3.eth.contract(address = allow_contract_address, abi = allow_contract_abi)
+    allow_contract_txn = allow_contract.functions.allow('0x78D0677032A35c63D142a48A2037048871212a8C', true)
+    allow_contract_signtxn = w3.eth.account.sign_transaction(allow_contract_txn, private_key = acct._private_key)
+    # w3.eth.send_raw_transaction(allow_contract_signtxn.rawTransaction)
+    invoke_contract_address = '0x78d0677032a35c63d142a48a2037048871212a8c'
+    invoke_contract_abi = abi.compound_invoke_abi
+    invoke_contract = w3.eth.contract(address = invoke_contract_address, abi = invoke_contract_abi)
+    invoke_contract_txn = invoke_contract.functions.invoke('0x414354494f4e5f535550504c595f4e41544956455f544f4b454e000000000000', '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f536010000000000000000000000000000000000000000000000000001c6bf52634000')
+    invoke_contract_signtxn = w3.eth.account.sign_transaction(invoke_contract_txn, private_key = acct._private_key)
+    # w3.eth.send_raw_transaction(invoke_contract_signtxn.rawTransaction)
 
-def withdraw():
-    exec_contract_address = '0xbc66d5bf7707b6237ebb630370f3f181b37000b9'
-    exec_contract_abi = os.getenv("compound_exec_abi")
-    exec_contract = w3.eth.contract(address = exec_contract_address, abi = exec_contract_abi)
-    withdraw_contract_txn = exec_contract.functions.execTransaction(0, '0x78D0677032A35c63D142a48A2037048871212a8C', 0, '0x555029a6000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000001414354494f4e5f57495448445241575f4e41544956455f544f4b454e0000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000006000000000000000000000000046e6b214b524310239732d51387075e0e70970bf000000000000000000000000f4a618e4850a46814f927b2f706897b379f2fd16ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', '0x626f740000000000000000000000000000000000000000000000000000000000000000000000000000000000498b647f113e3904a38e08dfa3c76bbede594488', '0x')
-    withdraw_contract_signtxn = w3.eth.account.sign_transaction(withdraw_maicontract_txn, private_key = acct._private_key)
+def withdraw(acct):
+    invoke_contract_address = '0xbc66d5bf7707b6237ebb630370f3f181b37000b9'
+    invoke_contract_abi = abi.compound_invoke_abi
+    invoke_contract = w3.eth.contract(address = invoke_contract_address, abi = invoke_contract_abi)
+    implement_contract_address = '0x46e6b214b524310239732D51387075E0e70970bf'
+    implement_contract_abi = abi.compound_implement_abi
+    implement_contract = w3.eth.contract(address = implement_contract_address, abi = implement_contract_abi)
+    val = implement_contract.functions.getBalance(acct)
+    invoke_contract_txn = invoke_contract.functions.invokeTransaction('0x414354494f4e5f57495448445241575f4e41544956455f544f4b454e00000000', '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f53601ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    invoke_contract_signtxn = w3.eth.account.sign_transaction(invoke_contract_txn, private_key = acct._private_key)
     # w3.eth.send_raw_transaction(contract2_signtxn.rawTransaction)
