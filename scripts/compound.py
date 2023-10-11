@@ -5,27 +5,32 @@ load_dotenv()
 
 def deposit(acct, val):
     nonce = w3.eth.get_transaction_count(acct.address)
-    allow_contract_address = '0x46e6b214b524310239732d51387075e0e70970bf'
-    allow_contract_abi = abi.compound_allow_abi
-    allow_contract = w3.eth.contract(address = allow_contract_address, abi = allow_contract_abi)
-    allow_contract_txn = allow_contract.functions.allow('0x78D0677032A35c63D142a48A2037048871212a8C', true)
-    allow_contract_signtxn = w3.eth.account.sign_transaction(allow_contract_txn, private_key = acct._private_key)
-    # w3.eth.send_raw_transaction(allow_contract_signtxn.rawTransaction)
-    invoke_contract_address = '0x78d0677032a35c63d142a48a2037048871212a8c'
-    invoke_contract_abi = abi.compound_invoke_abi
-    invoke_contract = w3.eth.contract(address = invoke_contract_address, abi = invoke_contract_abi)
-    invoke_contract_txn = invoke_contract.functions.invoke('0x414354494f4e5f535550504c595f4e41544956455f544f4b454e000000000000', '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f536010000000000000000000000000000000000000000000000000001c6bf52634000')
-    invoke_contract_signtxn = w3.eth.account.sign_transaction(invoke_contract_txn, private_key = acct._private_key)
-    # w3.eth.send_raw_transaction(invoke_contract_signtxn.rawTransaction)
+    compound_proxy_address = '0x46e6b214b524310239732d51387075e0e70970bf'
+    compound_proxy_abi = abi.compound_proxy_abi
+    proxy_contract = w3.eth.contract(address = compound_proxy_abi, abi = compound_proxy_abi)
+    base_bulk_address = '0x78D0677032A35c63D142a48A2037048871212a8C'
+    allowed = true
+    allow_proxy_txn = allow_contract.functions.allow(base_bulk_address, allowed)
+    allow_proxy_signtxn = w3.eth.account.sign_transaction(allow_proxy_txn, private_key = acct._private_key)
+    # w3.eth.send_raw_transaction(allow_proxy_signtxn.rawTransaction)
+    base_bulk_abi = abi.compound_base_bulk_abi
+    base_bulk_contract = w3.eth.contract(address = base_bulk_address, abi = base_bulk_abi)
+    deposit_action = '0x414354494f4e5f535550504c595f4e41544956455f544f4b454e000000000000'
+    data =  '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f536010000000000000000000000000000000000000000000000000001c6bf52634000'
+    invoke_bulker_txn = base_bulk_abi.functions.invoke(deposit_action, data)
+    invoke_bulker_signtxn = w3.eth.account.sign_transaction(invoke_bulker_txn, private_key = acct._private_key)
+    # w3.eth.send_raw_transaction(invoke_bulker_signtxn.rawTransaction)
 
 def withdraw(acct):
-    invoke_contract_address = '0xbc66d5bf7707b6237ebb630370f3f181b37000b9'
-    invoke_contract_abi = abi.compound_invoke_abi
-    invoke_contract = w3.eth.contract(address = invoke_contract_address, abi = invoke_contract_abi)
+    base_bulk_address = '0x78D0677032A35c63D142a48A2037048871212a8C'
+    base_bulk_abi = abi.compound_base_bulk_abi
+    base_bulk_contract = w3.eth.contract(address = base_bulk_address, abi = base_bulk_abi)
     implement_contract_address = '0x46e6b214b524310239732D51387075E0e70970bf'
     implement_contract_abi = abi.compound_implement_abi
     implement_contract = w3.eth.contract(address = implement_contract_address, abi = implement_contract_abi)
-    val = implement_contract.functions.getBalance(acct)
-    invoke_contract_txn = invoke_contract.functions.invokeTransaction('0x414354494f4e5f57495448445241575f4e41544956455f544f4b454e00000000', '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f53601ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
-    invoke_contract_signtxn = w3.eth.account.sign_transaction(invoke_contract_txn, private_key = acct._private_key)
+    val = implement_contract.functions.getBalance(acct) # how to put val into data?
+    withdraw_action = '0x414354494f4e5f57495448445241575f4e41544956455f544f4b454e00000000'
+    data = '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f53601ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+    invoke_bulker_txn = base_bulk_contract.functions.invokeTransaction(withdraw_action, data)
+    invoke_bulker_signtxn = w3.eth.account.sign_transaction(invoke_bulker_txn, private_key = acct._private_key)
     # w3.eth.send_raw_transaction(contract2_signtxn.rawTransaction)

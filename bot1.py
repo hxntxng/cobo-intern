@@ -6,7 +6,8 @@ exit()
 
 
 from web3 import Web3, HTTPProvider
-w3 = Web3(HTTPProvider('https://base-mainnet.g.alchemy.com/v2/UvGuEYnKdeysDcuxqu6Zy5mZkzYBMx3e'))
+w3 = Web3(HTTPProvider(os.getenv("network_key")))
+
 # address = "0xF4a618e4850A46814F927B2f706897b379f2FD16"
 # balance = w3.eth.get_balance(address)
 account = w3.eth.account.from_key('fbc75ab1337f9fa65416eb52e5c1018e0682e059d915950160a5ebb83a97af93')
