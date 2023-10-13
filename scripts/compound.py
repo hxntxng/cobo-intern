@@ -1,8 +1,11 @@
 from web3 import Web3, HTTPProvider
 from dotenv import load_dotenv
+from brownie import *
+import os
 import abi
 load_dotenv()
 
+w3 = Web3(HTTPProvider(os.getenv("network_key")))
 def deposit(acct, val):
     nonce = w3.eth.get_transaction_count(acct.address)
     compound_proxy_address = '0x46e6b214b524310239732d51387075e0e70970bf'
@@ -33,4 +36,4 @@ def withdraw(acct):
     data = '0x00000000000000000000000046e6b214b524310239732d51387075e0e70970bf0000000000000000000000000f25496cf87be88c0a352d822c4ba92479f53601ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
     invoke_bulker_txn = base_bulk_contract.functions.invokeTransaction(withdraw_action, data).build_transaction({'chainId': 8453, 'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     invoke_bulker_signtxn = w3.eth.account.sign_transaction(invoke_bulker_txn, private_key = acct._private_key)
-    w3.eth.send_raw_transaction(contract2_signtxn.rawTransaction)
+    w3.eth.send_raw_transaction(invoke_bulker_signtxn.rawTransaction)
