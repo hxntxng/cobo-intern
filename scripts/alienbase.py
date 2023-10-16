@@ -2,7 +2,7 @@ from web3 import Web3, HTTPProvider
 from dotenv import load_dotenv
 from brownie import *
 import os
-import abi
+import scripts.abi as abi
 load_dotenv()
 
 w3 = Web3(HTTPProvider(os.getenv("network_key")))

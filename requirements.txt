@@ -7,4 +7,4 @@ jsonschema==3.2.0
 pysha3==1.0.2
 pytest==6.2.5
 web3==5.31.3
-python-dotenv==0.5.2
+python-dotenv==0.16.0
