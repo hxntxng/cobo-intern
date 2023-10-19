@@ -1,28 +1,28 @@
 development:
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: optimism-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 6546
-    host: http://127.0.0.1
-    id: optimism-main-fork
-    name: Ganache-CLI (Optimism Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: arbitrum-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 6546
-    host: http://127.0.0.1
-    id: arbitrum-main-fork
-    name: Ganache-CLI (Arbitrum Mainnet Fork)
-    timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: optimism-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 6546
+  #   host: http://127.0.0.1
+  #   id: optimism-main-fork
+  #   name: Ganache-CLI (Optimism Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: arbitrum-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 6546
+  #   host: http://127.0.0.1
+  #   id: arbitrum-main-fork
+  #   name: Ganache-CLI (Arbitrum Mainnet Fork)
+  #   timeout: 120
   - cmd: anvil
     cmd_settings:
       port: 8545
@@ -36,16 +36,16 @@ development:
     host: http://127.0.0.1
     id: anvil-fork
     name: Anvil (Mainnet Fork)
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: development
-    name: Ganache-CLI
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: development
+  #   name: Ganache-CLI
   - cmd: ethnode
     cmd_settings:
       port: 8545
@@ -66,114 +66,114 @@ development:
     id: hardhat-fork
     name: Hardhat (Mainnet Fork)
     timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: mainnet
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: mainnet-fork
-    name: Ganache-CLI (Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: bsc-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: bsc-main-fork
-    name: Ganache-CLI (BSC-Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: ftm-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: ftm-main-fork
-    name: Ganache-CLI (FTM-Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: polygon-main
-      gas_limit: 20000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: polygon-main-fork
-    name: Ganache-CLI (Polygon-Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: xdai-main
-      gas_limit: 20000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: xdai-main-fork
-    name: Ganache-CLI (XDai-Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: avax-main
-      gas_limit: 20000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: avax-main-fork
-    name: Ganache-CLI (Avax-Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: aurora-main
-      gas_limit: 20000000
-      mnemonic: brownie
-      port: 8545
-    host: http://127.0.0.1
-    id: aurora-main-fork
-    name: Ganache-CLI (Aurora-Mainnet Fork)
-    timeout: 120
-  - cmd: anvil
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: base-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 6546
-    host: http://127.0.0.1
-    id: base-main-fork
-    name: Ganache-CLI (Base Mainnet Fork)
-    timeout: 120
-  - cmd: ganache-cli
-    cmd_settings:
-      accounts: 10
-      evm_version: istanbul
-      fork: mantle-main
-      gas_limit: 12000000
-      mnemonic: brownie
-      port: 6546
-    host: http://127.0.0.1
-    id: mantle-main-fork
-    name: Ganache-CLI (Mantle Mainnet Fork)
-    timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: mainnet
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: mainnet-fork
+  #   name: Ganache-CLI (Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: bsc-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: bsc-main-fork
+  #   name: Ganache-CLI (BSC-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: ftm-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: ftm-main-fork
+  #   name: Ganache-CLI (FTM-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: polygon-main
+  #     gas_limit: 20000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: polygon-main-fork
+  #   name: Ganache-CLI (Polygon-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: xdai-main
+  #     gas_limit: 20000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: xdai-main-fork
+  #   name: Ganache-CLI (XDai-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: avax-main
+  #     gas_limit: 20000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: avax-main-fork
+  #   name: Ganache-CLI (Avax-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: aurora-main
+  #     gas_limit: 20000000
+  #     mnemonic: brownie
+  #     port: 8545
+  #   host: http://127.0.0.1
+  #   id: aurora-main-fork
+  #   name: Ganache-CLI (Aurora-Mainnet Fork)
+  #   timeout: 120
+  # - cmd: anvil
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: base-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 6546
+  #   host: http://127.0.0.1
+  #   id: base-main-fork
+  #   name: Ganache-CLI (Base Mainnet Fork)
+  #   timeout: 120
+  # - cmd: ganache-cli
+  #   cmd_settings:
+  #     accounts: 10
+  #     evm_version: istanbul
+  #     fork: mantle-main
+  #     gas_limit: 12000000
+  #     mnemonic: brownie
+  #     port: 6546
+  #   host: http://127.0.0.1
+  #   id: mantle-main-fork
+  #   name: Ganache-CLI (Mantle Mainnet Fork)
+  #   timeout: 120
 live:
   - name: Ethereum
     networks:

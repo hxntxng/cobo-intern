@@ -2,18 +2,18 @@ from web3 import Web3, HTTPProvider
 from dotenv import load_dotenv
 from brownie import *
 import os
-from scripts import abi
+from . import abi
 load_dotenv()
 
 w3 = Web3(HTTPProvider(os.getenv("network_key")))
-def deposit(acct, val):
+def c_deposit(acct, val):
     nonce = w3.eth.get_transaction_count(acct.address)
     compound_proxy_address = '0x46e6b214b524310239732d51387075e0e70970bf'
     compound_proxy_abi = abi.compound_proxy_abi
-    proxy_contract = w3.eth.contract(address = compound_proxy_abi, abi = compound_proxy_abi)
+    proxy_contract = w3.eth.contract(address = compound_proxy_address, abi = compound_proxy_abi)
     base_bulk_address = '0x78D0677032A35c63D142a48A2037048871212a8C'
     allowed = true
-    allow_proxy_txn = allow_contract.functions.allow(base_bulk_address, allowed).build_transaction({'chainId': 8453, 'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
+    allow_proxy_txn = proxy_contract.functions.allow(base_bulk_address, allowed).build_transaction({'chainId': 8453, 'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     allow_proxy_signtxn = w3.eth.account.sign_transaction(allow_proxy_txn, private_key = acct._private_key)
     w3.eth.send_raw_transaction(allow_proxy_signtxn.rawTransaction)
     base_bulk_abi = abi.compound_base_bulk_abi
@@ -24,7 +24,10 @@ def deposit(acct, val):
     invoke_bulker_signtxn = w3.eth.account.sign_transaction(invoke_bulker_txn, private_key = acct._private_key)
     w3.eth.send_raw_transaction(invoke_bulker_signtxn.rawTransaction)
 
-def withdraw(acct):
+def c_get_val(acct):
+    pass
+
+def c_withdraw(acct):
     base_bulk_address = '0x78D0677032A35c63D142a48A2037048871212a8C'
     base_bulk_abi = abi.compound_base_bulk_abi
     base_bulk_contract = w3.eth.contract(address = base_bulk_address, abi = base_bulk_abi)

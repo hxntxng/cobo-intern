@@ -10,4 +10,5 @@ build/
 __pycache__
 
 argusfarming/
+foundry/
 node_modules/
