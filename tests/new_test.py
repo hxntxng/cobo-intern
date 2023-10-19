@@ -16,11 +16,7 @@ from scripts.compound import c_deposit, c_get_val, c_withdraw
 def test_alienbase_deposit():
     accounts.add()
     accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-    print('accounts', accounts, len(accounts))    
-    for i, acct in enumerate(accounts):
-        print(f'account {i}: address {acct.address}, balance {acct.balance()}')
-        print(type(acct), type(acct).__bases__)
-    print(web3._chain_id)
+    print(web3.chain_id)
     acct = accounts[10]
     print('acct', acct)
     # breakpoint()
