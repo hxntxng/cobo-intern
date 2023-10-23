@@ -1,3 +1,4 @@
+import time
 from web3 import Web3, HTTPProvider
 from dotenv import load_dotenv
 from brownie import *
@@ -24,8 +25,8 @@ def a_deposit(w3, acct, val):
     token_amt = 9547905041126
     token_min = 9500165515920
     eth_min = 9950000000000
-    deadline = 1695788793
-    addLiquidity_uniswap_txn = uniswap_router_contract.functions.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
+    deadline = int(time.time()) + 1800
+    addLiquidity_uniswap_txn = uniswap_router_contract.functions.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce, 'value': val})
     addLiquidity_uniswap_signtxn = w3.eth.account.sign_transaction(addLiquidity_uniswap_txn, private_key = acct.private_key)
     w3.eth.send_raw_transaction(addLiquidity_uniswap_signtxn.rawTransaction)
     # breakpoint()
@@ -56,9 +57,9 @@ def a_get_val(w3, acct):
     val = 0 # find value of alb
     deposit_distributor_txn = based_distributor_contract.functions.deposit(pid, val).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     deposit_distributor_signtxn = w3.eth.account.sign_transaction(deposit_distributor_txn, private_key = acct.private_key)
-    breakpoint()
+    # breakpoint()
     w3.eth.send_raw_transaction(deposit_distributor_signtxn.rawTransaction)
-    breakpoint()
+    # breakpoint()
     val = based_distributor_contract.functions.userInfo(6, acct.address).call()[0]
     # build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     # val_signtxn = w3.eth.account.sign_transaction(val_txn, private_key = acct.private_key)
@@ -68,16 +69,20 @@ def a_get_val(w3, acct):
 def a_withdraw(w3, acct):
     chainId=1337
     nonce = w3.eth.get_transaction_count(acct.address)
+    print(nonce)
     based_distributor_address = '0x52eaeCAC2402633d98b95213d0b473E069D86590'
     based_distributor_abi = abi.alienbase_based_distributor_abi
     based_distributor_contract = w3.eth.contract(address = based_distributor_address, abi = based_distributor_abi)
     pid = 6
     val = 0 # find value of alb
-    deposit_distributor_txn = based_distributor_contract.functions.deposit(pid, val).build_transaction({'chainId': chainId, 'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
+    breakpoint()
+    deposit_distributor_txn = based_distributor_contract.functions.deposit(pid, val).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     deposit_distributor_signtxn = w3.eth.account.sign_transaction(deposit_distributor_txn, private_key = acct.private_key)
     w3.eth.send_raw_transaction(deposit_distributor_signtxn.rawTransaction)
     val = a_get_val(w3, acct)
-    withdraw_distributor_txn = based_distributor_contract.functions.withdraw(6, val).build_transaction({'chainId': chainId, 'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
+    print(nonce)
+    breakpoint()
+    withdraw_distributor_txn = based_distributor_contract.functions.withdraw(6, val).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     withdraw_distributor_signtxn = w3.eth.account.sign_transaction(withdraw_distributor_txn, private_key = acct.private_key)
     w3.eth.send_raw_transaction(withdraw_distributor_signtxn.rawTransaction)
     return
