@@ -26,7 +26,7 @@ def a_deposit(w3, acct, val):
     token_min = 9500165515920
     eth_min = 9950000000000
     deadline = int(time.time()) + 1800
-    addLiquidity_uniswap_txn = uniswap_router_contract.functions.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce, 'value': val})
+    addLiquidity_uniswap_txn = uniswap_router_contract.functions.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce, 'value': w3.toWei(f'{val/10000000}', 'gwei')})
     addLiquidity_uniswap_signtxn = w3.eth.account.sign_transaction(addLiquidity_uniswap_txn, private_key = acct.private_key)
     w3.eth.send_raw_transaction(addLiquidity_uniswap_signtxn.rawTransaction)
     # breakpoint()
@@ -82,6 +82,7 @@ def a_withdraw(w3, acct):
     val = a_get_val(w3, acct)
     print(nonce)
     breakpoint()
+    nonce = w3.eth.get_transaction_count(acct.address)
     withdraw_distributor_txn = based_distributor_contract.functions.withdraw(6, val).build_transaction({'gas': 200000, 'gasPrice': w3.toWei('0.01', 'gwei'), 'nonce': nonce,})
     withdraw_distributor_signtxn = w3.eth.account.sign_transaction(withdraw_distributor_txn, private_key = acct.private_key)
     w3.eth.send_raw_transaction(withdraw_distributor_signtxn.rawTransaction)

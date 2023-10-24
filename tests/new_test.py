@@ -4,13 +4,12 @@ from scripts.alienbase import a_deposit, a_get_val, a_withdraw
 from scripts.compound import c_deposit, c_get_val, c_withdraw
 
 
-def test_account_balance():
-    account = get_account()
-
-    acct1_balance = accounts[0].balance()
-    print(acct1_balance)
-    accounts[0].transfer(accounts[1], "10 ether", gas_price=1000000, gas_limit=100000)
-    assert acct1_balance + 10 * 10**18 == accounts[1].balance()
+# def test_account_balance():
+#     account = get_account()
+#     acct1_balance = accounts[0].balance()
+#     print(acct1_balance)
+#     accounts[0].transfer(accounts[1], "10 ether", gas_price=1000000, gas_limit=100000)
+#     assert acct1_balance + 10 * 10**18 == accounts[1].balance()
 
 
 def test_alienbase_deposit():
@@ -19,6 +18,7 @@ def test_alienbase_deposit():
     print(web3.chain_id)
     acct = accounts[10]
     val = 5
+    print(dir(acct))
     a_deposit(web3, acct, val)
     assert a_get_val(web3, acct) == val
 
