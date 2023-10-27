@@ -12,15 +12,14 @@ from scripts.compound import c_deposit, c_get_val, c_withdraw
 #     assert acct1_balance + 10 * 10**18 == accounts[1].balance()
 
 
-# def test_alienbase_deposit():
-#     accounts.add()
-#     accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-#     print(web3.chain_id)
-#     acct = accounts[10]
-#     val = 5
-#     print(dir(account))
-#     a_deposit(web3, acct, val)
-#     assert a_get_val(web3, acct) == val
+def test_alienbase_deposit():
+    accounts.add()
+    accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
+    print(web3.chain_id)
+    acct = accounts[10]
+    val = 5
+    a_deposit(web3, acct, val)
+    assert a_get_val(web3, acct) == val
 
 # def test_alienbase_withdraw():
 #     accounts.add()
@@ -32,13 +31,13 @@ from scripts.compound import c_deposit, c_get_val, c_withdraw
 #     assert bal + val == acct.balance()
 #     assert a_get_val(web3, acct) == 0
 
-# def test_compound_deposit():
-#     accounts.add()
-#     accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-#     acct = accounts[10]
-#     val = 5
-#     c_deposit(web3, acct, val)
-#     assert c_get_val(web3, acct) == val
+def test_compound_deposit():
+    accounts.add()
+    accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
+    acct = accounts[10]
+    val = 5
+    c_deposit(web3, acct, val)
+    assert c_get_val(web3, acct) == val
 
 # def test_compound_withdraw():
 #     accounts.add()
@@ -50,11 +49,11 @@ from scripts.compound import c_deposit, c_get_val, c_withdraw
 #     assert bal + val == acct.balance()
 #     assert c_get_val(web3, acct) == 0
 
-def test_alienbase_get_val():
-    accounts.add()
-    accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-    acct = accounts[10]
-    assert a_get_val(web3, acct) == 0
+# def test_alienbase_get_val():
+#     accounts.add()
+#     accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
+#     acct = accounts[10]
+#     assert a_get_val(web3, acct) == 0
 
 # def test_compound_get_val():
 #     accounts.add()

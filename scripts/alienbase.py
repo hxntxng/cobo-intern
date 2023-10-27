@@ -22,11 +22,11 @@ def a_deposit(w3, acct, val):
     uniswap_router_contract = Contract.from_abi("UniswapV2Router02", address = uniswap_router_address, abi = uniswap_router_abi)
     acct_address = acct.address
     # print(dir(add_contract.functions))
-    token_amt = 9547905041126
-    token_min = 9500165515920
-    eth_min = 9950000000000
+    token_amt = acct.balance()/2
+    token_min = 1
+    eth_min = 1
     deadline = int(time.time()) + 1800
-    uniswap_router_contract.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline, {'from': acct, 'value': acct.balance/2})
+    uniswap_router_contract.addLiquidityETH(cbeth_token_address, token_amt, token_min, eth_min, acct_address, deadline, {'from': acct, 'value': acct.balance()/20})
     # addLiquidity_uniswap_signtxn = w3.eth.account.sign_transaction(addLiquidity_uniswap_txn, private_key = acct.private_key)
     # w3.eth.send_raw_transaction(addLiquidity_uniswap_signtxn.rawTransaction)
     # breakpoint()
@@ -71,7 +71,7 @@ def a_withdraw(w3, acct):
     based_distributor_contract = Contract.from_abi("BasedDistributorV2", address = based_distributor_address, abi = based_distributor_abi)
     pid = 6
     val = 0 # find value of alb
-    based_distributor_contract.functions.deposit(pid, val, {"from": acct})
+    based_distributor_contract.deposit(pid, val, {"from": acct})
     # deposit_distributor_signtxn = w3.eth.account.sign_transaction(deposit_distributor_txn, private_key = acct.private_key)
     # w3.eth.send_raw_transaction(deposit_distributor_signtxn.rawTransaction)
     val = a_get_val(w3, acct)
