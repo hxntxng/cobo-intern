@@ -22,7 +22,8 @@ def a_deposit(w3, acct, val):
     uniswap_router_contract = Contract.from_abi("UniswapV2Router02", address = uniswap_router_address, abi = uniswap_router_abi)
     acct_address = acct.address
     # print(dir(add_contract.functions))
-    token_amt = acct.balance()/2
+    uniswap_router_contract.swapExactETHForTokens(0, ["0x4200000000000000000000000000000000000006", cbeth_token_address], acct_address, int(time.time()) + 60 * 10, {'from':acct, 'value':acct.balance()/5})
+    token_amt = acct.balance()/10
     token_min = 1
     eth_min = 1
     deadline = int(time.time()) + 1800
