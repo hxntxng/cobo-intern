@@ -367,7 +367,7 @@ live:
     networks:
       - chainid: 8453
         explorer: https://api.basescan.org/api
-        host: https://rpc.vnet.tenderly.co/devnet/test/e0cc943b-1708-4cfc-8ea3-4cf778138cae
+        host: https://rpc.tenderly.co/fork/5d03abd3-f7e3-46e8-82b8-4f584e0b2e83
         id: base-main
         multicall2: "0xcA11bde05977b3631167028862bE2a173976CA11"
         name: Mainnet
