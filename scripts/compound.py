@@ -38,12 +38,16 @@ def c_deposit(acct, val):
     return val
 
 def c_get_val(acct):
-    implement_contract_address = '0x46e6b214b524310239732D51387075E0e70970bf'
-    implement_contract_abi = abi.compound_implement_abi 
-    implement_contract = Contract.from_abi("BaseBulker", implement_contract_address, implement_contract_abi)
-    val = implement_contract.balanceOf.call(acct.address, {"from": acct})
-    print(val)
-    return val
+    cWETH_address = '0x46e6b214b524310239732D51387075E0e70970bf'
+    cWETH_abi = abi.compound_implement_abi 
+    cWETH_contract = Contract.from_abi("BaseBulker", cWETH_address, cWETH_abi)
+    val = cWETH_contract.totalsCollateral.call(acct.address)
+    cWETH_address = '0x46e6b214b524310239732D51387075E0e70970bf'
+    cWETH_abi = abi.cWETH_abi
+    cWETH_contract = Contract.from_abi("CometExt", address = cWETH_address, abi = cWETH_abi)
+    factor_scale = cWETH_contract.factorScale()
+    print(factor_scale)
+    return val*factor_scale
 
 def c_withdraw(acct):
     base_bulk_address = '0x78D0677032A35c63D142a48A2037048871212a8C'
