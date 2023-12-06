@@ -4,6 +4,18 @@ from brownie import *
 from . import abi
 load_dotenv()
 
+def swap_eth_for_cbeth(acct, val):
+    uniswap_router_address = '0x8c1A3cF8f83074169FE5D7aD50B978e1cD6b37c7'
+    unlim = 115792089237316195423570985008687907853269984665640564039457584007913129639935
+    cbeth_token_address = '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22'
+    cbeth_token_abi = abi.alienbase_cbeth_token_abi
+    cbeth_token_contract = Contract.from_abi("UpgradeableOptimismMintableERC20", address = cbeth_token_address, abi = cbeth_token_abi)
+    cbeth_token_contract.approve(uniswap_router_address, unlim, {'from': acct})
+    uniswap_router_abi = abi.alienbase_uniswap_router_abi
+    uniswap_router_contract = Contract.from_abi("UniswapV2Router02", address = uniswap_router_address, abi = uniswap_router_abi)
+    acct_address = acct.address
+    uniswap_router_contract.swapExactETHForTokens(0, ["0x4200000000000000000000000000000000000006", cbeth_token_address], acct_address, int(time.time()) + 60 * 10, {'from':acct, 'value':val})
+
 def a_deposit(acct, val):
     cbeth_token_address = '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22'
     cbeth_token_abi = abi.alienbase_cbeth_token_abi
@@ -14,8 +26,8 @@ def a_deposit(acct, val):
     uniswap_router_abi = abi.alienbase_uniswap_router_abi
     uniswap_router_contract = Contract.from_abi("UniswapV2Router02", address = uniswap_router_address, abi = uniswap_router_abi)
     acct_address = acct.address
-    uniswap_router_contract.swapExactETHForTokens(0, ["0x4200000000000000000000000000000000000006", cbeth_token_address], acct_address, int(time.time()) + 60 * 10, {'from':acct, 'value':acct.balance()/5})
-    token_amt = acct.balance()/10
+    swap_eth_for_cbeth(acct, acct.balance()/5)
+    token_amt = int(cbeth_token_contract.balanceOf.call(acct.address, {"from": acct}))
     token_min = 1
     eth_min = 1
     deadline = int(time.time()) + 1800
