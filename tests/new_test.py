@@ -1,8 +1,7 @@
 import pytest
 from brownie import accounts, network, web3
 from scripts.alienbase import a_deposit, a_get_val, a_withdraw
-from scripts.compound import c_deposit, c_get_val, c_withdraw
-
+from scripts import compound
 
 # def test_account_balance():
 #     account = get_account()
@@ -32,13 +31,13 @@ from scripts.compound import c_deposit, c_get_val, c_withdraw
 
 def test_compound_deposit():
     # accounts.add('0x39f39b237d9339d47c00327dbb4c24cb45076cefa2b7b6bc0da55649fea09410')
-    print(accounts[0].address)
+    # print(accounts[0].address)
     # accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-    acct = accounts[0]
+    acct = accounts[3]
     val = 5
-    x = c_deposit(acct, val)
+    x = compound.deposit(acct, val)
     # print(x)
-    assert x == c_get_val(acct)
+    assert x == compound.get_val(acct)
 
 # def test_compound_withdraw():
 #     accounts.add()
@@ -57,8 +56,8 @@ def test_compound_deposit():
 #     assert a_get_val(acct) == 0
 
 def test_compound_get_val():
-    accounts.add()
-    accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
-    accounts.add('0x927cf46765031e17b33d0553b7f38d2bede8563b31cf3aa5a2fb10d474cd32fa')
-    acct = accounts[0]
-    assert c_get_val(acct) == 0
+    # accounts.add()
+    # accounts[0].transfer(accounts[10], "10 ether", gas_price = 1000000, gas_limit=100000)
+    # accounts.add('0x927cf46765031e17b33d0553b7f38d2bede8563b31cf3aa5a2fb10d474cd32fa')
+    acct = accounts[4]
+    assert compound.get_val(acct) == 0
