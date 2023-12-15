@@ -1,5 +1,5 @@
 from brownie import accounts
-from scripts import compound, alienbase
+from scripts import alienbase, compound_v3
 
 
 def test_alienbase_deposit():
@@ -17,14 +17,14 @@ def test_alienbase_withdraw():
 def test_compound_deposit():
     acct = accounts[0]
     val = 5
-    compound.withdraw_collateral(acct)
-    x = compound.deposit_collateral(acct, val)
-    assert x == compound.get_collateral_val(acct)
+    compound_v3.withdraw_collateral(acct)
+    x = compound_v3.deposit_collateral(acct, val)
+    assert x == compound_v3.get_collateral_val(acct)
 
 def test_compound_withdraw():
     acct = accounts[0]
-    compound.withdraw_collateral(acct)
-    assert compound.get_collateral_val(acct) == 0
+    compound_v3.withdraw_collateral(acct)
+    assert compound_v3.get_collateral_val(acct) == 0
 
 def test_alienbase_get_val():
     acct = accounts[0]
@@ -32,5 +32,5 @@ def test_alienbase_get_val():
 
 def test_compound_get_val():
     acct = accounts[0]
-    compound.withdraw_collateral(acct)
-    assert compound.get_collateral_val(acct) == 0
+    compound_v3.withdraw_collateral(acct)
+    assert compound_v3.get_collateral_val(acct) == 0
